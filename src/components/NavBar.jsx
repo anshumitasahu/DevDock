@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
     return (
-        <div className="flex justify-between items-center px-5 bg-surface border-b-4 border-b-border-light">
+        <div className="flex justify-between items-center px-5 bg-surface border-b-2 border-b-border">
+
             <Link to="/" className="flex items-center ">
                 <div>
                     <img src="/LogoDevDock.png" alt="" className="w-auto h-15" />
