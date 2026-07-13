@@ -1,16 +1,17 @@
 import { CalculatorIcon, StackIcon, TerminalWindowIcon, GearIcon, NotepadIcon, ListChecksIcon, ClockIcon, CalendarIcon, PlaylistIcon, VideoIcon } from "@phosphor-icons/react";
 import Calculator from "./AppLogic/Calculator";
+import ToDos from "./AppLogic/ToDoList";
 
-export default function AppsBar({ setActiveApp }) {
+export default function AppsBar({ openApp }) {
     return (
         <div className="flex justify-center items-center gap-5">
             <div>
                 <img src="/devscope-icon.png" className="w-15 bg-blue-500 p-2 rounded-md hover:-translate-y-1" />
             </div>
-            <div className="bg-pink-500 p-4 rounded-md hover:-translate-y-1" onClick={() => setActiveApp("calculator")}>
+            <div className="bg-pink-500 p-4 rounded-md hover:-translate-y-1" onClick={() => openApp("calculator")}>
                 <CalculatorIcon size={28} />
             </div>
-            <div className="bg-pink-700 p-4 rounded-md hover:-translate-y-1" onClick={() => setActiveApp("to-dos")}>
+            <div className="bg-pink-700 p-4 rounded-md hover:-translate-y-1" onClick={() => openApp("todos")}>
                 <ListChecksIcon size={28} />
             </div>
             <div className="bg-green-600 p-4 rounded-md hover:-translate-y-1">
