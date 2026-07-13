@@ -7,8 +7,11 @@ export default function AppsBar({ setActiveApp }) {
             <div>
                 <img src="/devscope-icon.png" className="w-15 bg-blue-500 p-2 rounded-md hover:-translate-y-1" />
             </div>
-            <div className="bg-pink-500 p-4 rounded-md hover:-translate-y-1">
-                <CalculatorIcon size={28} onClick={() => setActiveApp("calculator")} />
+            <div className="bg-pink-500 p-4 rounded-md hover:-translate-y-1" onClick={() => setActiveApp("calculator")}>
+                <CalculatorIcon size={28} />
+            </div>
+            <div className="bg-pink-700 p-4 rounded-md hover:-translate-y-1" onClick={() => setActiveApp("to-dos")}>
+                <ListChecksIcon size={28} />
             </div>
             <div className="bg-green-600 p-4 rounded-md hover:-translate-y-1">
                 <StackIcon size={28} />
@@ -21,9 +24,6 @@ export default function AppsBar({ setActiveApp }) {
             </div>
             <div className="bg-yellow-500 p-4 rounded-md hover:-translate-y-1">
                 <NotepadIcon size={28} />
-            </div>
-            <div className="bg-pink-700 p-4 rounded-md hover:-translate-y-1">
-                <ListChecksIcon size={28} />
             </div>
             <div className="bg-green-500 p-4 rounded-md hover:-translate-y-1">
                 <ClockIcon size={28} />

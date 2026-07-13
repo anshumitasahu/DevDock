@@ -25,7 +25,7 @@ export default function Calculator() {
     };
 
     return (
-        <div className="bg-white text-black flex flex-col gap-3 w-100 h-110 p-3 rounded-md">
+        <div className="bg-white text-black flex flex-col gap-3 w-fit h-fit p-3 rounded-md">
             <input
                 type="text"
                 value={display}
@@ -54,10 +54,6 @@ export default function Calculator() {
                 <button onClick={() => handleClick(".")} className="font-bold text-green-700 bg-gray-300/40 rounded-md px-2 py-4">.</button>
                 <button onClick={handleEqual} className="font-bold bg-green-700 text-white px-2 py-4 rounded-md">=</button>
             </div>
-
-
-
-
         </div >
     );
 }
