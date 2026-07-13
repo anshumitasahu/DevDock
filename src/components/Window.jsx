@@ -3,6 +3,7 @@ export default function Window({
     title,
     closeApp,
     children,
+    minimizeApp,
     desktopRef
 }) {
     const windowRef = useRef(null);
@@ -83,7 +84,7 @@ export default function Window({
                     {title}
                 </div>
                 <div className="flex gap-4">
-                    <button>- </button>
+                    <button onClick={minimizeApp}>- </button>
                     <button>+</button>
                     <button onClick={closeApp} className="bg-red-400 text-white font-bold rounded-full px-2
                     py-0">x</button>
