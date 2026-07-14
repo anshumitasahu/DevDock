@@ -1,16 +1,20 @@
+import { XIcon } from "@phosphor-icons/react";
 import { useState, useEffect, useRef } from "react";
 export default function Window({
     title,
     closeApp,
     children,
     minimizeApp,
-    desktopRef
+    desktopRef,
+    zIndex,
+    icon
 }) {
     const windowRef = useRef(null);
     const [position, setPosition] = useState({
         x: 200,
         y: 100,
     });
+    const [zindex, setzindex] = useState(zIndex);
 
     const [isDragging, setIsDragging] = useState(false);
 
@@ -26,6 +30,8 @@ export default function Window({
             x: e.clientX - position.x,
             y: e.clientY - position.y,
         });
+
+        setzindex(prev => prev + 1);
     };
 
     const handleMouseUp = () => {
@@ -49,12 +55,12 @@ export default function Window({
             y: Math.max(0, Math.min(newY, desktopHeight - windowHeight)),
         });
 
-        console.log({
-            desktopWidth,
-            desktopHeight,
-            windowWidth,
-            windowHeight,
-        });
+        // console.log({
+        //     desktopWidth,
+        //     desktopHeight,
+        //     windowWidth,
+        //     windowHeight,
+        // });
 
     };
 
@@ -71,23 +77,37 @@ export default function Window({
     return (
         <div
             ref={windowRef}
-            className="bg-white text-black p-2 rounded-lg"
+            className="bg-white/50 backdrop-blur-lg text-black p-2 rounded-lg"
             style={{
                 position: "absolute",
                 left: position.x,
                 top: position.y,
+                zIndex: zindex,
             }}
         >
-            <div className="flex justify-between cursor-move"
+            <div className="flex justify-between items-center cursor-move pb-2"
                 onMouseDown={handleMouseDown}>
-                <div>
+                <div className="flex gap-2 text-xs capitalize text-gray-500 items-center">
+                    {icon}
                     {title}
                 </div>
-                <div className="flex gap-4">
-                    <button onClick={minimizeApp}>- </button>
-                    <button>+</button>
-                    <button onClick={closeApp} className="bg-red-400 text-white font-bold rounded-full px-2
-                    py-0">x</button>
+                <div className="flex gap-1 h-fit">
+                    <button
+                        onClick={minimizeApp}
+                        className="bg-green-400 text-white font-bold rounded-full p-2 cursor-pointer"
+                    >
+
+                    </button>
+                    <button
+                        className="bg-amber-400 text-white font-bold rounded-full p-2 cursor-pointer"
+                    >
+
+                    </button>
+                    <button
+                        onClick={closeApp}
+                        className="bg-red-400 text-white font-bold rounded-full p-2 cursor-pointer"
+                    >
+                    </button>
                 </div>
             </div>
             <div>

@@ -25,7 +25,7 @@ export default function TopBar() {
         year: "numeric"
     })
     return (
-        <div className="bg-surface px-10 py-5 flex justify-between w-full">
+        <div className="bg-white/50 backdrop-blur-sm px-10 py-5 flex justify-between w-full">
             <div>
                 Kobayashi OS
             </div>

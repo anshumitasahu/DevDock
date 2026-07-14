@@ -4,113 +4,61 @@ import AppsBar from "./home/AppsBar";
 import Calculator from "./home/AppLogic/Calculator";
 import ToDos from "./home/AppLogic/ToDoList";
 import Window from "./Window";
+import { AppsMenu } from "../lib/apps";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
     const desktopRef = useRef();
+    const [opnedApps, setOpnedApps] = useState([]);
 
-    const [topZ, setTopZ] = useState();
+    function openApp(app) {
+        const uniqueId = uuidv4();
+        console.log("opending appid:", uniqueId);
+        setOpnedApps(prev => [...prev, {...app, id: uniqueId}]);
+    }
 
-    const nextZ = () => {
-        setTopZ(z => z + 1);
-        return topZ + 1;
-    };
-
-    const [openApps, setOpenApps] = useState([]);
-
-    const APPS = {
-        calculator: {
-            title: "Calculator",
-            component: Calculator,
-        },
-        todos: {
-            title: "To-Do List",
-            component: ToDos,
-        },
-    };
-
-    function openApp(id) {
-        setOpenApps(prev => {
-            const existing = prev.find(app => app.id === id);
-            if (existing) {
-                const nextZ = topZ + 1;
-                setTopZ(nextZ);
-
-                return prev.map(app =>
-                    app.id === id
-                        ? {
-                            ...app,
-                            minimized: false,
-                            zIndex: nextZ,
-                        }
-                        : app
-                );
+    function closeApp(appId) {
+        console.log("close app id:", appId);
+        const newOpnedAppList = opnedApps.filter((app) => {
+            if (app.id != appId) {
+                return app;
             }
-            return [
-                ...prev,
-                {
-                    id,
-                    zIndex: topZ + 1,
-                    minimized: false,
-                },
-            ];
-        });
+        })
 
-        setTopZ((z) => z + 1)
+        console.log(newOpnedAppList);
+
+        setOpnedApps(newOpnedAppList);
     }
 
-    function closeApp(id) {
-        setOpenApps(prev =>
-            prev.filter(app => app.id !== id)
-        );
+    function bringToFront(app) {
+
     }
 
-    function bringToFront(id) {
-        setTopZ(prev => {
-            const next = prev + 1;
-
-            setOpenApps(apps =>
-                apps.map(app =>
-                    app.id === id
-                        ? { ...app, zIndex: next }
-                        : app
-                )
-            );
-
-            return next;
-        });
-    }
-
-    function minimizeApp(id) {
-        setOpenApps(prev =>
-            prev.map(app =>
-                app.id === id
-                    ? { ...app, minimized: true }
-                    : app
-            )
-        );
+    function minimizeApp(app) {
+        alert("not implemented");
     }
 
     return (
-        <div className="flex flex-col w-screen h-screen">
+        <div className="flex flex-col w-screen h-screen text-black">
+            <div>
+                <img src="/bg.jpeg" alt="" className="w-screen h-screen absolute z-[-10]" />
+            </div>
             <TopBar />
             <div ref={desktopRef} className="relative flex-1 overflow-hidden">
-                {openApps
-                    .filter(app => !app.minimized)
-                    .map(app => {
-                        const Component = APPS[app.id].component;
-
+                {opnedApps
+                    .map((app) => {
                         return (
                             <Window
-                                key={app.id}
-                                id={app.id}
-                                title={APPS[app.id].title}
-                                zIndex={app.zIndex}
+                                key={app.name}
+                                title={app.name}
+                                icon={<app.icon size={14}/>}
+                                zIndex={5}
                                 desktopRef={desktopRef}
                                 bringToFront={bringToFront}
                                 closeApp={() => closeApp(app.id)}
-                                minimizeApp={() => minimizeApp(app.id)}
+                                minimizeApp={() => minimizeApp(app)}
                             >
-                                <Component />
+                                {app.app}
                             </Window>
                         );
                     })}
