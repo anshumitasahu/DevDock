@@ -14,7 +14,7 @@ export default function Home() {
     function openApp(app) {
         const uniqueId = uuidv4();
         console.log("opending appid:", uniqueId);
-        setOpnedApps(prev => [...prev, {...app, id: uniqueId}]);
+        setOpnedApps(prev => [...prev, { ...app, id: uniqueId }]);
     }
 
     function closeApp(appId) {
@@ -30,18 +30,10 @@ export default function Home() {
         setOpnedApps(newOpnedAppList);
     }
 
-    function bringToFront(app) {
-
-    }
-
-    function minimizeApp(app) {
-        alert("not implemented");
-    }
-
     return (
         <div className="flex flex-col w-screen h-screen text-black">
-            <div>
-                <img src="/bg.jpeg" alt="" className="w-screen h-screen absolute z-[-10]" />
+            <div className="w-screen h-screen absolute z-[-10]">
+                <img src="/bg2.png" alt="" className="h-full w-full object-cover" />
             </div>
             <TopBar />
             <div ref={desktopRef} className="relative flex-1 overflow-hidden">
@@ -49,14 +41,12 @@ export default function Home() {
                     .map((app) => {
                         return (
                             <Window
-                                key={app.name}
+                                key={app.id}
                                 title={app.name}
-                                icon={<app.icon size={14}/>}
+                                icon={<app.icon size={14} />}
                                 zIndex={5}
                                 desktopRef={desktopRef}
-                                bringToFront={bringToFront}
                                 closeApp={() => closeApp(app.id)}
-                                minimizeApp={() => minimizeApp(app)}
                             >
                                 {app.app}
                             </Window>

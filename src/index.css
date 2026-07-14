@@ -77,3 +77,44 @@
     transform: translate(0, 0) scale(1);
   }
 }
+
+@keyframes close {
+  from {
+    transform: translateY(0vh);
+  }
+
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+.close-app {
+  animation: close ease-in-out 0.3s;
+  transform: translateY(100vh);
+}
+
+@keyframes open {
+  from {
+    transform: translateY(100vh);
+  }
+
+  to {
+    transform: translateY(0vh);
+  }
+}
+
+.open-app {
+  animation: open ease-in-out 0.3s;
+}
+
+.wall::after {
+  content: ""; /* Leave this empty unless you want text rendered on top */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Use 100% instead of vw/vh so it matches the parent .wall container */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Clean black overlay with ~40% opacity */
+  z-index: 100;
+  pointer-events: none; /* Optional: allows clicks to pass through the overlay to buttons underneath */
+}

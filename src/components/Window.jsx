@@ -4,7 +4,6 @@ export default function Window({
     title,
     closeApp,
     children,
-    minimizeApp,
     desktopRef,
     zIndex,
     icon
@@ -15,6 +14,7 @@ export default function Window({
         y: 100,
     });
     const [zindex, setzindex] = useState(zIndex);
+    const [isMinimized, setIsMinimized] = useState(false);
 
     const [isDragging, setIsDragging] = useState(false);
 
@@ -64,6 +64,10 @@ export default function Window({
 
     };
 
+    const minimizeApp = () => {
+        setIsMinimized(prev => !prev);
+    }
+
     useEffect(() => {
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mouseup", handleMouseUp);
@@ -77,7 +81,7 @@ export default function Window({
     return (
         <div
             ref={windowRef}
-            className="bg-white/50 backdrop-blur-lg text-black p-2 rounded-lg"
+            className={`bg-white/50 backdrop-blur-lg text-black p-2 rounded-lg ${isMinimized ? "close-app" : "open-app"}`}
             style={{
                 position: "absolute",
                 left: position.x,
