@@ -14,6 +14,7 @@ export default function Home() {
     function openApp(app) {
         const uniqueId = uuidv4();
         console.log("opending appid:", uniqueId);
+        console.log(app)
         setOpnedApps(prev => [...prev, { ...app, id: uniqueId }]);
     }
 

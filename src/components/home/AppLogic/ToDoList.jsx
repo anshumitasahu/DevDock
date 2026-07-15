@@ -10,7 +10,6 @@ export default function ToDos() {
         setTasks([
             ...tasks,
             {
-                id: Date.now(),
                 text: input,
                 completed: false,
             },
