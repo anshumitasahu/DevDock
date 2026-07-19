@@ -29,25 +29,25 @@ export default function Calculator() {
     const handleButtons = numbers.map((number) =>
         <button
             onClick={() => handleClick(number)}
-            className="font-bold text-green-700 bg-gray-300/40 rounded-md px-2 py-4"
+            className="font-bold text-gray-500 bg-gray-300/40 rounded-xl px-2 py-4"
         >
             {number}
         </button>
     );
 
     return (
-        <div className="text-black flex flex-col gap-3 w-fit h-fit p-3 rounded-md">
+        <div className="text-black flex flex-col gap-3 w-fit h-fit p-3 rounded-xl bg-white">
             <input
                 type="text"
                 value={display}
                 readOnly
-                className="border border-gray-400/50 outline-0 px-3 py-6 text-xl"
+                className="border border-gray-400/50 outline-0 px-3 py-6 text-xl rounded-xl"
             />
             <div className="grid grid-cols-4 gap-3">
-                <button onClick={handleClear} className="font-bold text-green-700 bg-gray-300/40 rounded-md px-2 py-4">C</button>
-                <button onClick={handleDelete} className="font-bold text-green-700 bg-gray-300/40 rounded-md px-2 py-4">⌫</button>
+                <button onClick={handleClear} className="font-bold text-primary bg-gray-300/40 rounded-xl px-2 py-4">C</button>
+                <button onClick={handleDelete} className="font-bold text-primary bg-gray-300/40 rounded-xl px-2 py-4">⌫</button>
                 {handleButtons}
-                <button onClick={handleEqual} className="font-bold bg-green-700 text-white px-2 py-4 rounded-md">=</button>
+                <button onClick={handleEqual} className="font-bold bg-primary text-white px-2 py-4 rounded-xl">=</button>
             </div>
         </div >
     );
