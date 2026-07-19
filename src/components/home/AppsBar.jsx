@@ -5,7 +5,7 @@ import { AppsMenu } from "../../lib/apps";
 
 export default function AppsBar({ openApp }) {
     return (
-        <div className="w-full flex justify-center items-center absolute bottom-0 z-[1000]">
+        <div className="w-full flex justify-center items-center absolute bottom-0 z-1000">
             <div className="flex justify-center items-center gap-5 w-fit bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-white">
                 <div
                     className="cursor-pointer"

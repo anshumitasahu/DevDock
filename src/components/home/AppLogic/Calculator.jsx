@@ -26,7 +26,6 @@ export default function Calculator() {
         }
     };
 
-
     const handleButtons = numbers.map((number) =>
         <button
             onClick={() => handleClick(number)}
@@ -34,7 +33,8 @@ export default function Calculator() {
         >
             {number}
         </button>
-    )
+    );
+
     return (
         <div className="text-black flex flex-col gap-3 w-fit h-fit p-3 rounded-md">
             <input

@@ -13,46 +13,38 @@ export default function Home() {
 
     function openApp(app) {
         const uniqueId = uuidv4();
-        console.log("opending appid:", uniqueId);
-        console.log(app)
         setOpnedApps(prev => [...prev, { ...app, id: uniqueId }]);
     }
 
     function closeApp(appId) {
-        console.log("close app id:", appId);
         const newOpnedAppList = opnedApps.filter((app) => {
             if (app.id != appId) {
                 return app;
             }
         })
 
-        console.log(newOpnedAppList);
-
         setOpnedApps(newOpnedAppList);
     }
 
     return (
         <div className="flex flex-col w-screen h-screen text-black">
-            <div className="w-screen h-screen absolute z-[-10]">
+            <div className="w-screen h-screen absolute -z-10">
                 <img src="/bg2.png" alt="" className="h-full w-full object-cover" />
             </div>
             <TopBar />
             <div ref={desktopRef} className="relative flex-1 overflow-hidden">
-                {opnedApps
-                    .map((app) => {
-                        return (
-                            <Window
-                                key={app.id}
-                                title={app.name}
-                                icon={<app.icon size={14} />}
-                                zIndex={5}
-                                desktopRef={desktopRef}
-                                closeApp={() => closeApp(app.id)}
-                            >
-                                {app.app}
-                            </Window>
-                        );
-                    })}
+                {opnedApps.map((app) => (
+                    <Window
+                        key={app.id}
+                        title={app.name}
+                        icon={<app.icon size={14} />}
+                        zIndex={5}
+                        desktopRef={desktopRef}
+                        closeApp={() => closeApp(app.id)}
+                    >
+                        {app.app}
+                    </Window>
+                ))}
             </div>
             <AppsBar openApp={openApp} />
         </div >
