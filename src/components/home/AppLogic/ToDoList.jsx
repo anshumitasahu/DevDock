@@ -1,9 +1,27 @@
 import { PlusIcon, TrashIcon } from "@phosphor-icons/react";
 import { useState, useEffect } from "react";
-
 export default function ToDos() {
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        const toGet = localStorage.getItem("tasks")
+        const savedTasks = JSON.parse(toGet);
+        console.log("from local storage parse", savedTasks);
+        if (savedTasks) {
+            setTasks(savedTasks);
+            console.log("after setting task init", savedTasks);
+        }
+    }, [])
+
+    useEffect(() => {
+        if (tasks.length > 0) {
+            console.log("updated task", tasks)
+            console.log("stringigied tasks", JSON.stringify(tasks));
+            localStorage.setItem("tasks", JSON.stringify(tasks))
+            console.log("after setting with stringify update in task depended useeffect", localStorage.getItem("tasks"));
+        }
+    }, [tasks])
 
     function addTask() {
         if (input.trim() === "") return;
@@ -21,22 +39,21 @@ export default function ToDos() {
     }
 
     function handleComplete(id) {
-        const newCompletedTaskList = []
-        for (let i = 0; i < tasks.length; i++) {
-            const task = tasks[i];
-            if (task.id == id) {
-                if (task.complete == false) {
-                    task.complete = true;
-                } else {
-                    task.complete = false;
-                }
-            }
-            newCompletedTaskList.push(task);
-        }
-        console.log(newCompletedTaskList);
-        // setTasks(tasks.map(task => task.id == id ? { ...task, complete: true } : task))
-        // console.log(complete: true)
-        setTasks(newCompletedTaskList);
+        // const newCompletedTaskList = []
+        // for (let i = 0; i < tasks.length; i++) {
+        //     const task = tasks[i];
+        //     if (task.id == id) {
+        //         if (task.complete == false) {
+        //             task.complete = true;
+        //         } else {
+        //             task.complete = false;
+        //         }
+        //     }
+        //     newCompletedTaskList.push(task);
+        // }
+        // console.log(newCompletedTaskList);
+        setTasks(tasks.map(task => task.id === id ? { ...task, complete: !task.complete } : task))
+        // setTasks(newCompletedTaskList);
     }
 
     function deleteTask(id) {
