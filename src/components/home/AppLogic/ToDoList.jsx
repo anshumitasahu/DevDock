@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 export default function ToDos() {
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
-    // const [isComplete, setIsComplete] = useState(false)
-    // isComplete = false
 
     function addTask() {
         if (input.trim() === "") return;
@@ -19,13 +17,26 @@ export default function ToDos() {
             },
         ]);
 
-        console.log("added")
         setInput("");
     }
 
     function handleComplete(id) {
-        setTasks(tasks.map(task => task.id == id ? { ...task, complete: true } : task))
+        const newCompletedTaskList = []
+        for (let i = 0; i < tasks.length; i++) {
+            const task = tasks[i];
+            if (task.id == id) {
+                if (task.complete == false) {
+                    task.complete = true;
+                } else {
+                    task.complete = false;
+                }
+            }
+            newCompletedTaskList.push(task);
+        }
+        console.log(newCompletedTaskList);
+        // setTasks(tasks.map(task => task.id == id ? { ...task, complete: true } : task))
         // console.log(complete: true)
+        setTasks(newCompletedTaskList);
     }
 
     function deleteTask(id) {
@@ -63,7 +74,7 @@ export default function ToDos() {
                             style={{
                                 backgroundColor: task.complete ? "green" : "white"
                             }}
-                            ></button>
+                        ></button>
                         <span className="w-[80%]"
                             style={{
                                 textDecoration: task.complete ? "line-through" : "none"
