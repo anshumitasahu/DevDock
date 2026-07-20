@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function ToDos() {
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
+    const [isComplete, setIsComplete] = useState(false)
 
     function addTask() {
         if (input.trim() === "") return;
@@ -13,9 +14,11 @@ export default function ToDos() {
             {
                 id: Date.now(),
                 text: input,
-                completed: false,
+                complete: false
             },
         ]);
+
+        console.log("added")
 
         setInput("");
     }
@@ -52,8 +55,13 @@ export default function ToDos() {
                         key={task.id}
                         className=" cursor-pointer list-none p-4 m-2 bg-primary/10 flex justify-between gap-4 text-gray-600 rounded-xl h-fit"
                     >
-                        <button className="bg-white h-5 w-5 rounded-full" onClick={handleComplete}></button>
-                        <span className="w-[80%]">
+                        <button className="bg-white h-5 w-5 rounded-full" onClick={() => {
+                            handleComplete(setIsComplete(!isComplete))
+                        }}></button>
+                        <span className="w-[80%]"
+                            style={{
+                                textDecoration: isComplete ? "line-through" : "none"
+                            }}>
                             {task.text}
                         </span>
                         <button onClick={() => deleteTask(task.id)}>
