@@ -54,14 +54,6 @@ export default function Window({
             x: Math.max(0, Math.min(newX, desktopWidth - windowWidth)),
             y: Math.max(0, Math.min(newY, desktopHeight - windowHeight)),
         });
-
-        // console.log({
-        //     desktopWidth,
-        //     desktopHeight,
-        //     windowWidth,
-        //     windowHeight,
-        // });
-
     };
 
     const minimizeApp = () => {

@@ -1,6 +1,4 @@
-import { CalculatorIcon, StackIcon, TerminalWindowIcon, GearIcon, NotepadIcon, ListChecksIcon, ClockIcon, CalendarIcon, PlaylistIcon, VideoIcon } from "@phosphor-icons/react";
-import Calculator from "./AppLogic/Calculator";
-import ToDos from "./AppLogic/ToDoList";
+
 import { AppsMenu } from "../../lib/apps";
 
 export default function AppsBar({ openApp }) {

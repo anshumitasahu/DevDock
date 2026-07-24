@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import TopBar from "./home/topbar";
 import AppsBar from "./home/AppsBar";
 import Calculator from "./home/AppLogic/Calculator";
@@ -6,25 +6,14 @@ import ToDos from "./home/AppLogic/ToDoList";
 import Window from "./Window";
 import { AppsMenu } from "../lib/apps";
 import { v4 as uuidv4 } from 'uuid';
+import { useAppStore } from '../store.jsx';
 
 export default function Home() {
     const desktopRef = useRef();
-    const [opnedApps, setOpnedApps] = useState([]);
 
-    function openApp(app) {
-        const uniqueId = uuidv4();
-        setOpnedApps(prev => [...prev, { ...app, id: uniqueId }]);
-    }
-
-    function closeApp(appId) {
-        const newOpnedAppList = opnedApps.filter((app) => {
-            if (app.id != appId) {
-                return app;
-            }
-        })
-
-        setOpnedApps(newOpnedAppList);
-    }
+    const openedApps = useAppStore((state) => state.openedApps);
+    const openApp = useAppStore((state) => state.openApp);
+    const closeApp = useAppStore((state) => state.closeApp);
 
     return (
         <div className="flex flex-col w-screen h-screen text-black">
@@ -33,7 +22,7 @@ export default function Home() {
             </div>
             <TopBar />
             <div ref={desktopRef} className="relative flex-1 overflow-hidden">
-                {opnedApps.map((app) => (
+                {openedApps.map((app) => (
                     <Window
                         key={app.id}
                         title={app.name}
